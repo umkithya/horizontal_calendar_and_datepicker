@@ -1,0 +1,31 @@
+name: horizontal_calendar_and_datepicker
+description: Built with Horizontal datepicker and vertical Month/Year picker Hope you guys love it !!! .
+version: 0.0.3+2
+homepage: https://github.com/karthick-picco/Scrollable_Bottomsheet_Date_Picker
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  intl: ^0.17.0
+  simple_gesture_detector: ^0.2.0
+  adaptive_date_picker: ^0.0.5
+  jiffy: ^5.0.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  
+
+flutter:
+  assets:
+    - assets/
+  fonts:
+    - family: Gordita
+      fonts:
+        - asset: fonts/Gordita Regular.otf
+        - asset: fonts/Gordita Medium.otf
+        - asset: fonts/Gordita Regular Italic.otf

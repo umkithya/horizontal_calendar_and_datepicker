@@ -9,7 +9,6 @@ class CellContent extends StatelessWidget {
   final DateTime focusedDay;
   final dynamic locale;
   final bool isTodayHighlighted;
-  final bool isToday;
   final bool isSelected;
   final bool isRangeStart;
   final bool isRangeEnd;
@@ -29,7 +28,6 @@ class CellContent extends StatelessWidget {
     required this.calendarStyle,
     required this.calendarBuilders,
     required this.isTodayHighlighted,
-    required this.isToday,
     required this.isSelected,
     required this.isRangeStart,
     required this.isRangeEnd,
@@ -106,8 +104,6 @@ class CellContent extends StatelessWidget {
                     : calendarStyle.disabledTextStyle
                 : calendarStyle.defaultTextStyle,
           );
-    } else if (isToday && isTodayHighlighted) {
-      cell = Text(text, style: calendarStyle.todayTextStyle);
     } else if (isHoliday) {
       cell = calendarBuilders.holidayBuilder?.call(context, day, focusedDay) ??
           Text(

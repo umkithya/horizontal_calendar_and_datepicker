@@ -1066,9 +1066,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
                     : widget.daysOfWeekStyle.weekdayStyle.copyWith(
                         color: isSelected != null && isSelected
                             ? Colors.white
-                            : widget.calendarStyle.isTodayHighlighted && isToday
-                                ? Colors.white
-                                : null),
+                            : null),
               ),
             ),
           );
@@ -1087,15 +1085,11 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
                 borderRadius: selectedDecoration.borderRadius ??
                     BorderRadius.circular(10),
                 border: isToday &&
-                        widget.calendarStyle.isTodayHighlighted == false &&
+                        widget.calendarStyle.isTodayHighlighted == true &&
                         isSelected == false
                     ? selectedDecoration.border
                     : Border.all(color: Colors.transparent),
-                color: (isSelected != null && isSelected)
-                    ? Colors.amber
-                    : isToday && widget.calendarStyle.isTodayHighlighted
-                        ? Colors.amber
-                        : Colors.transparent),
+                color: isSelected! ? Colors.amber : Colors.transparent),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -1109,8 +1103,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
                   calendarStyle: widget.calendarStyle,
                   calendarBuilders: widget.calendarBuilders,
                   isTodayHighlighted: widget.calendarStyle.isTodayHighlighted,
-                  isToday: isToday,
-                  isSelected: widget.selectedDayPredicate?.call(day) ?? false,
+                  isSelected: isSelected,
                   isRangeStart: isRangeStart,
                   isRangeEnd: isRangeEnd,
                   isWithinRange: isWithinRange,

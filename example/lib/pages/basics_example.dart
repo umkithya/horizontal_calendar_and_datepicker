@@ -11,8 +11,9 @@ class BasicCalender extends StatefulWidget {
 class _BasicCalenderState extends State<BasicCalender> {
   CalendarFormat _calendarFormat = CalendarFormat.week;
   DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
+  DateTime? _selectedDay = DateTime.now();
   bool doff = true;
+  int day = 0;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -21,7 +22,26 @@ class _BasicCalenderState extends State<BasicCalender> {
       },
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+              onPressed: () {
+                day += 1;
+                _focusedDay = DateTime.now().subtract(Duration(days: day));
+                _selectedDay = _focusedDay;
+
+                ValueNotifier(_focusedDay);
+                setState(() {});
+              },
+              icon: Icon(Icons.arrow_back)),
           title: Text('TableCalendar - Basics'),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  day += 1;
+                  _focusedDay = DateTime.now().add(Duration(days: day));
+                  ValueNotifier(_focusedDay);
+                },
+                icon: Icon(Icons.arrow_forward))
+          ],
         ),
         // body: CustomCalender(),
         body: Column(
@@ -95,10 +115,12 @@ class _BasicCalenderState extends State<BasicCalender> {
                       leftChevronPadding: EdgeInsets.all(0),
                       rightChevronPadding: EdgeInsets.all(0)),
                   selectedDayPredicate: (day) {
+                    debugPrint("_selectedDay: $_selectedDay day: $day, ");
                     return isSameDay(_selectedDay, day);
                   },
                   onDaySelected: (selectedDay, focusedDay) {
                     debugPrint("Hello, " + selectedDay.day.toString());
+                    debugPrint("Hello1, " + focusedDay.day.toString());
                     // if (context.mounted) {
                     setState(() {
                       _selectedDay = selectedDay;

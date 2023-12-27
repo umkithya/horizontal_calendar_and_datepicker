@@ -204,8 +204,8 @@ class TableCalendar<T> extends StatefulWidget {
   final void Function(PageController pageController)? onCalendarCreated;
   final double leftchevronsize;
   final double rightchevronsize;
-  Image? LeftIcon;
-  Image? RightIcon;
+  final Widget? LeftIcon;
+  final Widget? RightIcon;
   final bool? isfuturedaydisable;
 
   /// Creates a `TableCalendar` widget.
@@ -300,14 +300,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
   @override
   void initState() {
     super.initState();
-    if (widget.LeftIcon == null) {
-      widget.LeftIcon = Image(image: AssetImage("assets/left_chevron.png"));
-    }
-    if (widget.RightIcon == null) {
-      widget.RightIcon = Image(
-        image: AssetImage("assets/right_chevron.png"),
-      );
-    }
+
     final initialPage = _calculateFocusedPage(
         widget.calendarFormat, widget.firstDay, widget.focusedDay);
     _previousIndex = initialPage;

@@ -92,15 +92,7 @@ class _CalendarHeaderState extends State<CalendarHeader> {
                     },
                     splashRadius: 20,
                     iconSize: 4,
-                    icon: SizedBox(
-                      height: 15,
-                      width: 6,
-                      child: Container(
-                        height: 8,
-                        width: 4.3,
-                        child: widget.LeftIcon,
-                      ),
-                    ),
+                    icon: widget.LeftIcon ?? SizedBox(),
                   ),
                 if (widget.headerStyle.rightChevronVisible)
                   IconButton(
@@ -109,16 +101,7 @@ class _CalendarHeaderState extends State<CalendarHeader> {
                     },
                     splashRadius: 20,
                     iconSize: 4,
-                    icon: SizedBox(
-                      height: 15,
-                      width: 6,
-                      child: Container(
-                        height: 15,
-                        width: 6,
-                        // margin: const EdgeInsets.only(right: 16 ),
-                        child: widget.RightIcon,
-                      ),
-                    ),
+                    icon: widget.RightIcon ?? SizedBox(),
                   ),
               ],
             ),

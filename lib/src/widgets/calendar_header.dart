@@ -69,15 +69,12 @@ class _CalendarHeaderState extends State<CalendarHeader> {
               GestureDetector(
                 onTap: widget.onHeaderTap,
                 onLongPress: widget.onHeaderLongPress,
-                child: Container(
-                  margin: EdgeInsets.only(left: 16),
-                  child: Text(
-                    "${DValue[0]["Month"]}  ${DValue[0]["Year"]}",
-                    style: widget.headerStyle.titleTextStyle,
-                    textAlign: widget.headerStyle.titleCentered
-                        ? TextAlign.center
-                        : TextAlign.start,
-                  ),
+                child: Text(
+                  "${DValue[0]["Month"]}  ${DValue[0]["Year"]}",
+                  style: widget.headerStyle.titleTextStyle,
+                  textAlign: widget.headerStyle.titleCentered
+                      ? TextAlign.center
+                      : TextAlign.start,
                 ),
               ),
           Container(

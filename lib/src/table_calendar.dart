@@ -641,7 +641,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
 
   void _showCustomPicker() async {
     DateTime? temp;
-    if (!Platform.isAndroid) {
+    if (Platform.isAndroid) {
       DateTime? pickedDate = await showDatePicker(
           context: context,
           initialDate: DateTime.now(),

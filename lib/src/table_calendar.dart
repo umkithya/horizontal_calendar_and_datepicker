@@ -645,9 +645,9 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
       DateTime? pickedDate = await showDatePicker(
           context: context,
           initialDate: DateTime.now(),
-          firstDate: DateTime(1950),
+          firstDate: widget.firstDay,
           //DateTime.now() - not to allow to choose before today.
-          lastDate: DateTime(2100));
+          lastDate: widget.lastDay);
 
       if (pickedDate != null) {
         temp = pickedDate;
@@ -891,6 +891,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
         Flexible(
           flex: widget.shouldFillViewport ? 1 : 0,
           child: TableCalendarBase(
+            calendarStyle: widget.calendarStyle,
             onCalendarCreated: (pageController) {
               _pageController = pageController;
               widget.onCalendarCreated?.call(pageController);
@@ -1075,48 +1076,52 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
 
         var selectedDecoration =
             widget.calendarStyle.selectedDecoration as BoxDecoration;
-        Widget content = AnimatedContainer(
-          duration: const Duration(milliseconds: 250),
-          width: widget.dayWidth,
-          decoration: BoxDecoration(
-              gradient: selectedDecoration.gradient,
-              borderRadius:
-                  selectedDecoration.borderRadius ?? BorderRadius.circular(10),
-              border: isToday &&
-                      widget.calendarStyle.isTodayHighlighted == false &&
-                      isSelected == false
-                  ? selectedDecoration.border
-                  : Border.all(color: Colors.transparent),
-              color: (isSelected != null && isSelected)
-                  ? Colors.amber
-                  : isToday && widget.calendarStyle.isTodayHighlighted
-                      ? Colors.amber
-                      : Colors.transparent),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              dowCell,
-              CellContent(
-                isfuturedaydisable: widget.isfuturedaydisable,
-                key:
-                    ValueKey('CellContent-${day.year}-${day.month}-${day.day}'),
-                day: day,
-                focusedDay: focusedDay,
-                calendarStyle: widget.calendarStyle,
-                calendarBuilders: widget.calendarBuilders,
-                isTodayHighlighted: widget.calendarStyle.isTodayHighlighted,
-                isToday: isToday,
-                isSelected: widget.selectedDayPredicate?.call(day) ?? false,
-                isRangeStart: isRangeStart,
-                isRangeEnd: isRangeEnd,
-                isWithinRange: isWithinRange,
-                isOutside: isOutside,
-                isDisabled: isDisabled,
-                isWeekend: isWeekend,
-                isHoliday: widget.holidayPredicate?.call(day) ?? false,
-                locale: widget.locale,
-              ),
-            ],
+        Widget content = Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: widget.calendarStyle.dayPadding ?? 0),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 250),
+            width: widget.dayWidth,
+            decoration: BoxDecoration(
+                gradient: selectedDecoration.gradient,
+                borderRadius: selectedDecoration.borderRadius ??
+                    BorderRadius.circular(10),
+                border: isToday &&
+                        widget.calendarStyle.isTodayHighlighted == false &&
+                        isSelected == false
+                    ? selectedDecoration.border
+                    : Border.all(color: Colors.transparent),
+                color: (isSelected != null && isSelected)
+                    ? Colors.amber
+                    : isToday && widget.calendarStyle.isTodayHighlighted
+                        ? Colors.amber
+                        : Colors.transparent),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                dowCell,
+                CellContent(
+                  isfuturedaydisable: widget.isfuturedaydisable,
+                  key: ValueKey(
+                      'CellContent-${day.year}-${day.month}-${day.day}'),
+                  day: day,
+                  focusedDay: focusedDay,
+                  calendarStyle: widget.calendarStyle,
+                  calendarBuilders: widget.calendarBuilders,
+                  isTodayHighlighted: widget.calendarStyle.isTodayHighlighted,
+                  isToday: isToday,
+                  isSelected: widget.selectedDayPredicate?.call(day) ?? false,
+                  isRangeStart: isRangeStart,
+                  isRangeEnd: isRangeEnd,
+                  isWithinRange: isWithinRange,
+                  isOutside: isOutside,
+                  isDisabled: isDisabled,
+                  isWeekend: isWeekend,
+                  isHoliday: widget.holidayPredicate?.call(day) ?? false,
+                  locale: widget.locale,
+                ),
+              ],
+            ),
           ),
         );
 

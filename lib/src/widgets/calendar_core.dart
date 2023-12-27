@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:horizontal_calendar_and_datepicker/horizontal_calendar_and_datepicker.dart';
 
 import '../shared/utils.dart';
 import 'calendar_page.dart';
@@ -28,6 +29,7 @@ class CalendarCore extends StatelessWidget {
   final PageController? pageController;
   final ScrollPhysics? scrollPhysics;
   final _OnCalendarPageChanged onPageChanged;
+  final CalendarStyle? calendarStyle;
 
   const CalendarCore({
     Key? key,
@@ -51,7 +53,7 @@ class CalendarCore extends StatelessWidget {
     this.dowDecoration,
     this.rowDecoration,
     this.tableBorder,
-    this.scrollPhysics,
+    this.scrollPhysics, this.calendarStyle,
   })  : assert(!dowVisible || (dowHeight != null && dowBuilder != null)),
         super(key: key);
 

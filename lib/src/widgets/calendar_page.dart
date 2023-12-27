@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:horizontal_calendar_and_datepicker/horizontal_calendar_and_datepicker.dart';
 
 class CalendarPage extends StatelessWidget {
   final Widget Function(BuildContext context, DateTime day)? dowBuilder;
@@ -11,6 +12,7 @@ class CalendarPage extends StatelessWidget {
   final bool dowVisible;
   final bool weekNumberVisible;
   final double? dowHeight;
+  final CalendarStyle? calendarStyle;
 
   const CalendarPage({
     Key? key,
@@ -24,26 +26,31 @@ class CalendarPage extends StatelessWidget {
     this.dowVisible = true,
     this.weekNumberVisible = false,
     this.dowHeight,
+    this.calendarStyle,
   })  : assert(!dowVisible || (dowHeight != null && dowBuilder != null)),
         assert(!weekNumberVisible || weekNumberBuilder != null),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        if (weekNumberVisible) _buildWeekNumbers(context),
-        Expanded(
-          child: Table(
-            border: tableBorder,
-            children: [
-              // if (dowVisible) _buildDaysOfWeek(context),
-              ..._buildCalendarDays(context),
-            ],
+    return Padding(
+      padding: this.calendarStyle?.canlendarMargin ??
+          const EdgeInsets.symmetric(horizontal: 0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (weekNumberVisible) _buildWeekNumbers(context),
+          Expanded(
+            child: Table(
+              border: tableBorder,
+              children: [
+                // if (dowVisible) _buildDaysOfWeek(context),
+                ..._buildCalendarDays(context),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

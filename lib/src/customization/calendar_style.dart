@@ -146,9 +146,13 @@ class CalendarStyle {
 
   /// Border for the internal `Table` widget.
   final TableBorder tableBorder;
+  final EdgeInsets? canlendarMargin;
+  final double? dayPadding;
 
   /// Creates a `CalendarStyle` used by `TableCalendar` widget.
   const CalendarStyle({
+    this.dayPadding,
+    this.canlendarMargin,
     this.confirmButtonStyle,
     this.cancelButtonStyle,
     this.isTodayHighlighted = true,
